@@ -80,6 +80,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -122,13 +151,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="data-inspection-and-validation" class="level2">
 <h2 class="anchored" data-anchor-id="data-inspection-and-validation">1.2 Data Inspection and Validation</h2>
-<div id="82c69b59" class="cell" data-execution_count="1">
+<div id="ac752a62" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/housing.csv"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="56">
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="7bf332f6" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/housing.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
 <div>
 
 
@@ -190,15 +220,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="88cc09ba" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Shape:"</span>, df.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="7ca942eb" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Shape:"</span>, df.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Shape: (130, 5)</code></pre>
 </div>
 </div>
-<div id="bcc32e90" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Data types:"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.dtypes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="e5963263" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Data types:"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.dtypes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Data types:
 id                   int64
@@ -209,9 +239,9 @@ price_thousands    float64
 dtype: object</code></pre>
 </div>
 </div>
-<div id="7d75d285" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Missing values per column:"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.isna().<span class="bu">sum</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="82be25cd" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Missing values per column:"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.isna().<span class="bu">sum</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Missing values per column:
 id                 0
@@ -222,64 +252,116 @@ price_thousands    0
 dtype: int64</code></pre>
 </div>
 </div>
-<div id="ba8213ee" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"IDs unique:"</span>, df[<span class="st">"id"</span>].is_unique)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="007c12fe" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"IDs unique:"</span>, df[<span class="st">"id"</span>].is_unique)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>IDs unique: True</code></pre>
 </div>
 </div>
-<p>The dataset contains 130 observations and 5 variables: an <code>id</code> column, the response, and three predictors. The total number of missing values is 0, so no missing values are present. The <code>id</code> column is unique , so each row is a distinct observation.</p>
-</section>
-<section id="reproducibility-requirements" class="level2">
-<h2 class="anchored" data-anchor-id="reproducibility-requirements">1.3 Reproducibility requirements</h2>
-<p>This report is written to meet the following requirements:</p>
-<ul>
-<li>It executes in order from a clean session, with no hidden notebook state.</li>
-<li>All tables and numerical results are generated by code, and no numbers are copied by hand.</li>
-<li>The dataset is read with a relative path (<code>data/housing.csv</code>), and <code>_quarto.yml</code> sets project-root execution.</li>
-<li>The provided dataset is used as is, with no manually entered values.</li>
-</ul>
+<p>The dataset housing dataset contains 130 observations and 5 variables: an <code>id</code> column, the response <code>price_thousands</code>, and three predictors <code>size_sqft</code>, <code>bedrooms</code>, <code>age_years</code>. The total number of missing values is 0, the data had no missing values in any column. The <code>id</code> column is unique , so each row is a distinct observation.</p>
 </section>
 </section>
 <section id="part-2-matrix-setup-and-standardization" class="level1">
 <h1>Part 2 — Matrix Setup and Standardization</h1>
-<div id="73fa750d" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pred_cols <span class="op">=</span> [<span class="st">"size_sqft"</span>, <span class="st">"bedrooms"</span>, <span class="st">"age_years"</span>]</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>predictors <span class="op">=</span> df[pred_cols].to_numpy()</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"price_thousands"</span>].to_numpy()</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>means <span class="op">=</span> predictors.mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>sds <span class="op">=</span> predictors.std(axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> (predictors <span class="op">-</span> means) <span class="op">/</span> sds</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="b827a538" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pred_cols <span class="op">=</span> [<span class="st">"size_sqft"</span>, <span class="st">"bedrooms"</span>, <span class="st">"age_years"</span>]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>predictors <span class="op">=</span> df[pred_cols].to_numpy()</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"price_thousands"</span>].to_numpy()</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>means <span class="op">=</span> predictors.mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>sds <span class="op">=</span> predictors.std(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> (predictors <span class="op">-</span> means) <span class="op">/</span> sds</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Check that the standardized columns have mean about 0 and standard deviation 1:</p>
-<div id="5a0d8ba0" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Column means of Z:"</span>, np.<span class="bu">round</span>(Z.mean(axis<span class="op">=</span><span class="dv">0</span>), <span class="dv">10</span>))</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Column SDs of Z:  "</span>, np.<span class="bu">round</span>(Z.std(axis<span class="op">=</span><span class="dv">0</span>), <span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Standardized columns verification of mean and standard deviation of approximately 0 and 1 respectively :</p>
+<div id="5699f1d6" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Column means of Z:"</span>, np.<span class="bu">round</span>(Z.mean(axis<span class="op">=</span><span class="dv">0</span>), <span class="dv">3</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Column Standard Deviations of Z:  "</span>, np.<span class="bu">round</span>(Z.std(axis<span class="op">=</span><span class="dv">0</span>), <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Column means of Z: [-0.  0.  0.]
-Column SDs of Z:   [1. 1. 1.]</code></pre>
+Column Standard Deviations of Z:   [1. 1. 1.]</code></pre>
 </div>
 </div>
-<div id="a5eccd14" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.column_stack([np.ones(<span class="bu">len</span>(Z)), Z])</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>shape_table <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Quantity"</span>: [</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"predictors"</span>, <span class="st">"Z"</span>, <span class="st">"X"</span>, <span class="st">"y"</span>,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"matrix rank of X"</span>,</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"number of predictors (excluding intercept)"</span>,</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Value"</span>: [</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">str</span>(predictors.shape), <span class="bu">str</span>(Z.shape), <span class="bu">str</span>(X.shape), <span class="bu">str</span>(y.shape),</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">str</span>(np.linalg.matrix_rank(X)),</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">str</span>(Z.shape[<span class="dv">1</span>]),</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>shape_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="64">
+<div id="aaec1de9" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.column_stack([np.ones(<span class="bu">len</span>(Z)), Z])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="8e20e725" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    X[:<span class="dv">5</span>],</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>[<span class="st">"intercept"</span>] <span class="op">+</span> pred_cols</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>).<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">intercept</th>
+<th data-quarto-table-cell-role="th">size_sqft</th>
+<th data-quarto-table-cell-role="th">bedrooms</th>
+<th data-quarto-table-cell-role="th">age_years</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>1.0</td>
+<td>-1.363</td>
+<td>-1.148</td>
+<td>-0.891</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>1.0</td>
+<td>2.450</td>
+<td>2.712</td>
+<td>-0.092</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>1.0</td>
+<td>-1.604</td>
+<td>-1.148</td>
+<td>0.459</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>1.0</td>
+<td>-0.213</td>
+<td>0.139</td>
+<td>-0.213</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>1.0</td>
+<td>-0.594</td>
+<td>-1.148</td>
+<td>-0.385</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="b616094b" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>shape_table <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Quantity"</span>: [</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Shape of Predictors"</span>, <span class="st">"Shape of Z"</span>, <span class="st">"Shape of X"</span>, <span class="st">"Shape of y"</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Matrix rank of X"</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Number of predictors"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Value"</span>: [</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">str</span>(predictors.shape), <span class="bu">str</span>(Z.shape), <span class="bu">str</span>(X.shape), <span class="bu">str</span>(y.shape),</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">str</span>(np.linalg.matrix_rank(X)),</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">str</span>(Z.shape[<span class="dv">1</span>]),</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>shape_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="34">
 <div>
 
 
@@ -294,32 +376,32 @@ Column SDs of Z:   [1. 1. 1.]</code></pre>
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">0</th>
-<td>predictors</td>
+<td>Shape of Predictors</td>
 <td>(130, 3)</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
-<td>Z</td>
+<td>Shape of Z</td>
 <td>(130, 3)</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">2</th>
-<td>X</td>
+<td>Shape of X</td>
 <td>(130, 4)</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">3</th>
-<td>y</td>
+<td>Shape of y</td>
 <td>(130,)</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">4</th>
-<td>matrix rank of X</td>
+<td>Matrix rank of X</td>
 <td>4</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">5</th>
-<td>number of predictors (excluding intercept)</td>
+<td>Number of predictors</td>
 <td>3</td>
 </tr>
 </tbody>
@@ -328,7 +410,228 @@ Column SDs of Z:   [1. 1. 1.]</code></pre>
 </div>
 </div>
 </div>
-<p><strong>Written response.</strong> <code>X</code> and <code>y</code> must have compatible shapes because the model <code>y ≈ Xβ</code> requires the number of rows in <code>X</code> to equal the number of observations in <code>y</code>. Otherwise <code>X @ beta</code> and the residuals <code>y - X @ beta</code> cannot be computed. The intercept column of ones lets the model estimate a baseline level (the predicted price when all standardized predictors are at their means) instead of forcing the fitted surface through the origin. Standardizing put all three predictors on a common scale with mean 0 and standard deviation 1, so their coefficients can be compared directly. Broadcasting makes this possible without a loop because NumPy stretches the length-3 vectors <code>means</code> and <code>sds</code> across every row of the <code>(n, 3)</code> matrix, so <code>(predictors - means) / sds</code> is applied to each column at once.</p>
+<p><code>X</code> and <code>y</code> must have compatible shapes because each row of <code>X</code> describes the same observation as the matching entry of <code>y</code>, so the number of rows in <code>X</code> must equal the length of <code>y</code>. If the counts differed, some observations would have predictors but no response, or a response but no predictors, and the model could not compare its predictions to the data. Going forward, compatible shapes are also needed for the computation itself: <code>X @ beta</code> requires the columns of <code>X</code> to match the length of <code>beta</code>, and the residuals <code>y - X @ beta</code> require both vectors to have length n.</p>
+<p>The intercept column of ones lets the model estimate a baseline level (the predicted price when all standardized predictors are at their means or held constant) instead of forcing the fitted surface through the origin. Standardizing put all three predictors on a common scale with mean 0 and standard deviation 1, so their coefficients can be compared directly. Broadcasting makes this standardization possible without a loop because NumPy stretches the vectors <code>means</code> and <code>sds</code>, which each contain three values (one per predictor), across every row of the <code>predictors</code> matrix, so <code>(predictors - means) / sds</code> is applied to each column at once bringing out the standardized matrix Z.</p>
+</section>
+<section id="part-3-least-squares" class="level1">
+<h1>Part 3 — Least squares</h1>
+<div id="9f67be5a" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>beta_hat, <span class="op">*</span>_ <span class="op">=</span> np.linalg.lstsq(X, y, rcond<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>coef_names <span class="op">=</span> [<span class="st">"intercept"</span>] <span class="op">+</span> [<span class="ss">f"</span><span class="sc">{</span>c<span class="sc">}</span><span class="ss"> (standardized)"</span> <span class="cf">for</span> c <span class="kw">in</span> pred_cols]</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>coef_table <span class="op">=</span> pd.DataFrame({<span class="st">"term"</span>: coef_names, <span class="st">"estimate"</span>: beta_hat})</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>coef_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">term</th>
+<th data-quarto-table-cell-role="th">estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>intercept</td>
+<td>378.691462</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>size_sqft (standardized)</td>
+<td>66.797486</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>bedrooms (standardized)</td>
+<td>13.692393</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>age_years (standardized)</td>
+<td>-17.928664</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The intercept is 378.69, which equals the mean of <code>y</code> because the predictors are centered: it is the predicted price (in thousands) for a house that is average on all three predictors. The coefficient for <code>size_sqft</code> is 66.80, so a one-standard-deviation increase in size is associated with a predicted price about 66.80 thousand higher, holding the other predictors fixed. The coefficient for <code>bedrooms</code> is 13.69, a smaller positive association, and the coefficient for <code>age_years</code> is -17.93, so older houses have lower predicted prices. Comparing absolute values, <code>size_sqft</code> has the largest coefficient which is approximately 66.80, followed by <code>age_years</code> and then <code>bedrooms</code>.</p>
+<div id="93ce6203" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fitted <span class="op">=</span> X <span class="op">@</span> beta_hat</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>residuals <span class="op">=</span> y <span class="op">-</span> fitted</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>residuals_mean <span class="op">=</span> residuals.mean()</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>rmse <span class="op">=</span> np.sqrt(np.mean(residuals <span class="op">**</span> <span class="dv">2</span>))</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Residual mean:"</span>, residuals.mean())</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"RMSE:"</span>, rmse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Residual mean: 5.24708481792074e-15
+RMSE: 28.818978213959117</code></pre>
+</div>
+</div>
+<p><code>X @ beta_hat</code> is the matrix product of the design matrix and the coefficient vector, so each entry is the model’s fitted (predicted) price for one house: the intercept plus each standardized predictor times its coefficient. When an intercept is present, least squares forces the residuals to be orthogonal to the column of ones, which means they sum to zero, so the residual mean is near zero up to floating-point error. RMSE summarizes the typical size of the residuals, in the same units as the response (thousands of dollars). Finally, <code>X * beta_hat</code> multiplies element by element, broadcasting the vector <code>beta_hat</code>, which contains four values (one per column of <code>X</code>), down every row of <code>X</code> and returning a (130, 4) array, while <code>X @ beta_hat</code> does a matrix product that sums across the columns and returns one fitted value per observation, a (130,) array which is the model’s predicted price for each house, in thousands of dollars.</p>
+</section>
+<section id="part-4-qr-svd-and-conditioning" class="level1">
+<h1>Part 4 — QR, SVD, and Conditioning</h1>
+<section id="qr-decomposition" class="level2">
+<h2 class="anchored" data-anchor-id="qr-decomposition">QR Decomposition</h2>
+<div id="3fcb7c9b" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Q, R <span class="op">=</span> np.linalg.qr(X)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Q shape:"</span>, Q.shape)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"R shape:"</span>, R.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Q shape: (130, 4)
+R shape: (4, 4)</code></pre>
+</div>
+</div>
+<section id="verification-of-the-factorization-and-orthonormality" class="level3">
+<h3 class="anchored" data-anchor-id="verification-of-the-factorization-and-orthonormality">Verification of the factorization and orthonormality</h3>
+<div id="199a26d8" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Q @ R ≈ X:   "</span>, np.allclose(Q <span class="op">@</span> R, X))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Q.T @ Q ≈ I: "</span>, np.allclose(Q.T <span class="op">@</span> Q, np.eye(Q.shape[<span class="dv">1</span>])))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Q @ R ≈ X:    True
+Q.T @ Q ≈ I:  True</code></pre>
+</div>
+</div>
+<p><code>Q @ R ≈ X</code> confirms that the factorization reproduces the design matrix, and <code>Q.T @ Q ≈ I</code> confirms that the columns of <code>Q</code> are orthonormal.</p>
+</section>
+</section>
+<section id="svd" class="level2">
+<h2 class="anchored" data-anchor-id="svd">SVD</h2>
+<div id="b38ad9f3" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>U, s, Vt <span class="op">=</span> np.linalg.svd(X, full_matrices<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"U shape:"</span>, U.shape)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"s shape:"</span>, s.shape)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Vt shape:"</span>, Vt.shape)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Singular values:"</span>, s)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>U shape: (130, 4)
+s shape: (4,)
+Vt shape: (4, 4)
+Singular values: [15.60230122 11.40175425 10.66724547  5.72521361]</code></pre>
+</div>
+</div>
+<div id="57507495" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>X_reconstructed <span class="op">=</span> U <span class="op">@</span> np.diag(s) <span class="op">@</span> Vt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="verification-of-the-svd-reconstruction" class="level3">
+<h3 class="anchored" data-anchor-id="verification-of-the-svd-reconstruction">Verification of the SVD reconstruction</h3>
+<div id="3e0faa83" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"U S Vt ≈ X:"</span>, np.allclose(X_reconstructed, X))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>U S Vt ≈ X: True</code></pre>
+</div>
+</div>
+<p>The reconstruction <code>U @ diag(s) @ Vt</code> matches <code>X</code>, and the four singular values (15.60, 11.40, 10.67, 5.73) are all well away from zero, so no direction in the design matrix is nearly redundant. The check <code>U @ diag(s) @ Vt ≈ X</code> returned True, so the SVD reconstructs the design matrix.</p>
+</section>
+</section>
+<section id="rank-and-conditioning" class="level2">
+<h2 class="anchored" data-anchor-id="rank-and-conditioning">Rank and conditioning</h2>
+<div id="bdf9fbfc" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>X_raw <span class="op">=</span> np.column_stack([np.ones(<span class="bu">len</span>(predictors)), predictors])</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>rank_X <span class="op">=</span> np.linalg.matrix_rank(X)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>cond_X <span class="op">=</span> np.linalg.cond(X)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>cond_raw <span class="op">=</span> np.linalg.cond(X_raw)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Quantity"</span>: [<span class="st">"rank of X"</span>, <span class="st">"condition number of X (standardized)"</span>,</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"condition number of X_raw (unstandardized)"</span>],</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Value"</span>: [<span class="bu">str</span>(rank_X), <span class="ss">f"</span><span class="sc">{</span>cond_X<span class="sc">:.3f}</span><span class="ss">"</span>, <span class="ss">f"</span><span class="sc">{</span>cond_raw<span class="sc">:,.1f}</span><span class="ss">"</span>],</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="43">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Quantity</th>
+<th data-quarto-table-cell-role="th">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>rank of X</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>condition number of X (standardized)</td>
+<td>2.725</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>condition number of X_raw (unstandardized)</td>
+<td>10,733.3</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="ecdcdc7c" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>corr <span class="op">=</span> np.corrcoef(predictors, rowvar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(corr, index<span class="op">=</span>pred_cols, columns<span class="op">=</span>pred_cols).<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="44">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">size_sqft</th>
+<th data-quarto-table-cell-role="th">bedrooms</th>
+<th data-quarto-table-cell-role="th">age_years</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">size_sqft</th>
+<td>1.00</td>
+<td>0.73</td>
+<td>0.32</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">bedrooms</th>
+<td>0.73</td>
+<td>1.00</td>
+<td>0.17</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">age_years</th>
+<td>0.32</td>
+<td>0.17</td>
+<td>1.00</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The check <code>Q @ R ≈ X</code> verifies that the QR factorization reproduces the design matrix, and <code>Q.T @ Q ≈ I</code> verifies that the columns of <code>Q</code> are orthonormal, which is what makes QR numerically stable for least squares. In our results, the two checks returned True and True, so <code>Q @ R</code> reproduces <code>X</code> the design matrix and the columns of <code>Q</code> are orthonormal. In general, singular values measure the strength of the directions in a matrix. The singular values (15.60, 11.40, 10.67, 5.73) measure the strength of the directions in <code>X</code>: large values are strong directions, and values near zero would be weak. In the results above, 15.60, 11.40, 10.67, 5.73: the strongest direction is 15.60 and the weakest is 5.73, which is still about 37% of the strongest and far from zero, so no direction is nearly redundant.</p>
+<p>A large condition number, the ratio of the largest to the smallest singular value, suggests the matrix is sensitive to small perturbations, so coefficient estimates could be unstable but the condition number of the standardized matrix is only 2.73, so coefficient estimates should be stable. The condition number dropped from about 10,733 for the raw matrix to about 2.73 after standardization. Measurement scale affects the raw value because <code>size_sqft</code> is in the thousands while <code>bedrooms</code> is a small count, so the raw columns differ hugely in magnitude, which inflates the ratio even though the information is has not changed. The standardized design matrix shows no evidence of severe near-redundancy, since its smallest singular value is not close to zero and its condition number is small.</p>
+</section>
+</section>
+<section id="part-5-reproducibility-and-numerical-computing-reflection" class="level1">
+<h1>Part 5 — Reproducibility and Numerical-Computing Reflection</h1>
+<p>Clean execution matters for a computational report because it ensures that the analysis is accurate, reproducible, and reliable: anyone can rerun the file from top to bottom and regenerate every number from the data and code. Without it, a report can look correct while depending on cells run out of order or values defined by hand. Rendering from a clean session proves that the report depends only on what is written in the file. Reusable code should not depend on hidden notebook state because it makes the code unreliable and harder to reuse. If cells are executed out of order, a notebook may appear to work correctly while relying on values that exist only in the current session, such as a variable created in a cell that was later edited or deleted. Therefore, anyone running the notebook from a clean start may encounter errors or obtain different results. This creates reproducibility problems and makes the code unreliable and difficult to reuse.</p>
+<p>In ordinary numerical work, <code>np.linalg.lstsq()</code> is preferable to manually computing <span class="math inline">\((X^\top X)^{-1}X^\top y\)</span> because it is more numerically stable and avoids explicitly calculating the inverse of a matrix. Forming <span class="math inline">\(X^\top X\)</span> squares the condition number, and matrix inversion can amplify numerical error. The least-squares function instead solves the problem directly from a stable factorization of <code>X</code>, so it gives more reliable coefficients. Similarly, <code>np.allclose()</code> is preferable to exact equality when checking QR and SVD reconstruction because floating-point computations lead to small rounding errors. Even when a reconstruction is done correctly, the computed values may differ slightly by tiny amounts. So an exact check could show a mismatch in values even though the reconstruction is correct. <code>np.allclose()</code> checks whether the values are sufficiently close within specified tolerances rather than requiring exact equality. The condition-number comparison taught me that the scale and magnitude of data can influence numerical stability. The raw design matrix had a condition number of about 10,733, compared with 2.73 after standardization, because variables measured on very different scales can produce poorly conditioned matrices, making numerical calculations more sensitive to small errors. A large condition number therefore does not by itself show that predictors are redundant, so examining condition numbers is an important diagnostic practice that should be read alongside the singular values when considering whether rescaling variables is necessary.</p>
+<p>One practice I will carry into the final project is rendering the whole report from a clean session with <code>quarto render</code> before submitting. This will help me confirm that all required variables are defined, functions are self-contained, and results do not depend on any hidden notebook state. Ultimately, these practices will make my final project more reliable, transparent, and reproducible.</p>
 </section>
 
 </main>
