@@ -151,14 +151,14 @@ window.Quarto = {
 </section>
 <section id="data-inspection-and-validation" class="level2">
 <h2 class="anchored" data-anchor-id="data-inspection-and-validation">1.2 Data Inspection and Validation</h2>
-<div id="617aae0d" class="cell" data-execution_count="1">
+<div id="56fc2558" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="4243f6d1" class="cell" data-execution_count="2">
+<div id="3aeae4e4" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/housing.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="24">
 <div>
 
 
@@ -220,13 +220,13 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="d4a99b81" class="cell" data-execution_count="3">
+<div id="1b8b7294" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Shape:"</span>, df.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Shape: (130, 5)</code></pre>
 </div>
 </div>
-<div id="5eb71a1a" class="cell" data-execution_count="4">
+<div id="4eeab414" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Data types:"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.dtypes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -239,7 +239,7 @@ price_thousands    float64
 dtype: object</code></pre>
 </div>
 </div>
-<div id="a6daf43d" class="cell" data-execution_count="5">
+<div id="6e6e7371" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Missing values per column:"</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.isna().<span class="bu">sum</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -252,7 +252,7 @@ price_thousands    0
 dtype: int64</code></pre>
 </div>
 </div>
-<div id="8fd1745f" class="cell" data-execution_count="6">
+<div id="ad7a2bca" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"IDs unique:"</span>, df[<span class="st">"id"</span>].is_unique)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>IDs unique: True</code></pre>
@@ -263,7 +263,7 @@ dtype: int64</code></pre>
 </section>
 <section id="part-2-matrix-setup-and-standardization" class="level1">
 <h1>Part 2 — Matrix Setup and Standardization</h1>
-<div id="9e70ef16" class="cell" data-execution_count="8">
+<div id="08f4d28d" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pred_cols <span class="op">=</span> [<span class="st">"size_sqft"</span>, <span class="st">"bedrooms"</span>, <span class="st">"age_years"</span>]</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>predictors <span class="op">=</span> df[pred_cols].to_numpy()</span>
@@ -275,7 +275,7 @@ dtype: int64</code></pre>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> (predictors <span class="op">-</span> means) <span class="op">/</span> sds</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Standardized columns verification of mean and standard deviation of approximately 0 and 1 respectively :</p>
-<div id="74c3aa97" class="cell" data-execution_count="9">
+<div id="b08d47e1" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Column means of Z:"</span>, np.<span class="bu">round</span>(Z.mean(axis<span class="op">=</span><span class="dv">0</span>), <span class="dv">3</span>))</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Column Standard Deviations of Z:  "</span>, np.<span class="bu">round</span>(Z.std(axis<span class="op">=</span><span class="dv">0</span>), <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -283,15 +283,15 @@ dtype: int64</code></pre>
 Column Standard Deviations of Z:   [1. 1. 1.]</code></pre>
 </div>
 </div>
-<div id="7e9061fd" class="cell" data-execution_count="10">
+<div id="d54b451f" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.column_stack([np.ones(<span class="bu">len</span>(Z)), Z])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="e6dd35ad" class="cell" data-execution_count="11">
+<div id="352b6f40" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    X[:<span class="dv">5</span>],</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>[<span class="st">"intercept"</span>] <span class="op">+</span> pred_cols</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>).<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="33">
 <div>
 
 
@@ -347,7 +347,7 @@ Column Standard Deviations of Z:   [1. 1. 1.]</code></pre>
 </div>
 </div>
 </div>
-<div id="ac639701" class="cell" data-execution_count="12">
+<div id="8b2f37e6" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>shape_table <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Quantity"</span>: [</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Shape of Predictors"</span>, <span class="st">"Shape of Z"</span>, <span class="st">"Shape of X"</span>, <span class="st">"Shape of y"</span>,</span>
@@ -361,7 +361,7 @@ Column Standard Deviations of Z:   [1. 1. 1.]</code></pre>
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    ],</span>
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>shape_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="34">
 <div>
 
 
@@ -415,13 +415,13 @@ Column Standard Deviations of Z:   [1. 1. 1.]</code></pre>
 </section>
 <section id="part-3-least-squares" class="level1">
 <h1>Part 3 — Least squares</h1>
-<div id="5b54841b" class="cell" data-execution_count="13">
+<div id="cb5c315c" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>beta_hat, <span class="op">*</span>_ <span class="op">=</span> np.linalg.lstsq(X, y, rcond<span class="op">=</span><span class="va">None</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>coef_names <span class="op">=</span> [<span class="st">"intercept"</span>] <span class="op">+</span> [<span class="ss">f"</span><span class="sc">{</span>c<span class="sc">}</span><span class="ss"> (standardized)"</span> <span class="cf">for</span> c <span class="kw">in</span> pred_cols]</span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>coef_table <span class="op">=</span> pd.DataFrame({<span class="st">"term"</span>: coef_names, <span class="st">"estimate"</span>: beta_hat})</span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>coef_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="35">
 <div>
 
 
@@ -461,7 +461,7 @@ Column Standard Deviations of Z:   [1. 1. 1.]</code></pre>
 </div>
 </div>
 <p>The intercept is 378.69, which equals the mean of <code>y</code> because the predictors are centered: it is the predicted price (in thousands) for a house that is average on all three predictors. The coefficient for <code>size_sqft</code> is 66.80, so a one-standard-deviation increase in size is associated with a predicted price about 66.80 thousand higher, holding the other predictors fixed. The coefficient for <code>bedrooms</code> is 13.69, a smaller positive association, and the coefficient for <code>age_years</code> is -17.93, so older houses have lower predicted prices. Comparing absolute values, <code>size_sqft</code> has the largest coefficient which is approximately 66.80, followed by <code>age_years</code> and then <code>bedrooms</code>.</p>
-<div id="02933dbb" class="cell" data-execution_count="15">
+<div id="d38c37b6" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fitted <span class="op">=</span> X <span class="op">@</span> beta_hat</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>residuals <span class="op">=</span> y <span class="op">-</span> fitted</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -481,7 +481,7 @@ RMSE: 28.818978213959117</code></pre>
 <h1>Part 4 — QR, SVD, and Conditioning</h1>
 <section id="qr-decomposition" class="level2">
 <h2 class="anchored" data-anchor-id="qr-decomposition">QR Decomposition</h2>
-<div id="ebc5eae8" class="cell" data-execution_count="16">
+<div id="7d0ecda9" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Q, R <span class="op">=</span> np.linalg.qr(X)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Q shape:"</span>, Q.shape)</span>
@@ -493,7 +493,7 @@ R shape: (4, 4)</code></pre>
 </div>
 <section id="verification-of-the-factorization-and-orthonormality" class="level3">
 <h3 class="anchored" data-anchor-id="verification-of-the-factorization-and-orthonormality">Verification of the factorization and orthonormality</h3>
-<div id="07f8c07e" class="cell" data-execution_count="17">
+<div id="3f78680a" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Q @ R ≈ X:   "</span>, np.allclose(Q <span class="op">@</span> R, X))</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Q.T @ Q ≈ I: "</span>, np.allclose(Q.T <span class="op">@</span> Q, np.eye(Q.shape[<span class="dv">1</span>])))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -506,7 +506,7 @@ Q.T @ Q ≈ I:  True</code></pre>
 </section>
 <section id="svd" class="level2">
 <h2 class="anchored" data-anchor-id="svd">SVD</h2>
-<div id="e12ab22b" class="cell" data-execution_count="18">
+<div id="4e72f1d2" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>U, s, Vt <span class="op">=</span> np.linalg.svd(X, full_matrices<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"U shape:"</span>, U.shape)</span>
@@ -520,12 +520,12 @@ Vt shape: (4, 4)
 Singular values: [15.60230122 11.40175425 10.66724547  5.72521361]</code></pre>
 </div>
 </div>
-<div id="de450125" class="cell" data-execution_count="19">
+<div id="051f0989" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>X_reconstructed <span class="op">=</span> U <span class="op">@</span> np.diag(s) <span class="op">@</span> Vt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="verification-of-the-svd-reconstruction" class="level3">
 <h3 class="anchored" data-anchor-id="verification-of-the-svd-reconstruction">Verification of the SVD reconstruction</h3>
-<div id="1021b02d" class="cell" data-execution_count="20">
+<div id="69109669" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"U S Vt ≈ X:"</span>, np.allclose(X_reconstructed, X))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>U S Vt ≈ X: True</code></pre>
@@ -536,7 +536,7 @@ Singular values: [15.60230122 11.40175425 10.66724547  5.72521361]</code></pre>
 </section>
 <section id="rank-and-conditioning" class="level2">
 <h2 class="anchored" data-anchor-id="rank-and-conditioning">Rank and conditioning</h2>
-<div id="830d709c" class="cell" data-execution_count="21">
+<div id="7bdb2c56" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>X_raw <span class="op">=</span> np.column_stack([np.ones(<span class="bu">len</span>(predictors)), predictors])</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>rank_X <span class="op">=</span> np.linalg.matrix_rank(X)</span>
@@ -548,7 +548,7 @@ Singular values: [15.60230122 11.40175425 10.66724547  5.72521361]</code></pre>
 <span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"condition number of X_raw (unstandardized)"</span>],</span>
 <span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Value"</span>: [<span class="bu">str</span>(rank_X), <span class="ss">f"</span><span class="sc">{</span>cond_X<span class="sc">:.3f}</span><span class="ss">"</span>, <span class="ss">f"</span><span class="sc">{</span>cond_raw<span class="sc">:,.1f}</span><span class="ss">"</span>],</span>
 <span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div class="cell-output cell-output-display" data-execution_count="43">
 <div>
 
 
@@ -582,10 +582,10 @@ Singular values: [15.60230122 11.40175425 10.66724547  5.72521361]</code></pre>
 </div>
 </div>
 </div>
-<div id="1ff0b424" class="cell" data-execution_count="22">
+<div id="948f7a13" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>corr <span class="op">=</span> np.corrcoef(predictors, rowvar<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(corr, index<span class="op">=</span>pred_cols, columns<span class="op">=</span>pred_cols).<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="44">
 <div>
 
 
